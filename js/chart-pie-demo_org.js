@@ -6,7 +6,7 @@ var myPieChart = new Chart(ctx, {
   data: {
     ###LABELS###
     datasets: [{
-      ###1_ILIAS_7.2###//data: [34, 20, 20, 10],
+      ###ILIAS_7.2###//data: [34, 20, 20, 10],
       ###COLORS###
     }],
   },
@@ -20,7 +20,7 @@ var myPieChart2 = new Chart(ctx, {
   data: {
     ###LABELS###
     datasets: [{
-      ###1_ILIAS_7.1###//data: [50, 20, 20, 10],
+      ###ILIAS_7.1###//data: [50, 20, 20, 10],
       ###COLORS###
     }],
   },
@@ -35,7 +35,7 @@ var myPieChart3 = new Chart(ctx, {
   data: {
     ###LABELS###
     datasets: [{
-      ###1_ILIAS_7.0###//data: [50, 20, 20, 10],
+      ###ILIAS_7.0###//data: [50, 20, 20, 10],
       ###COLORS###
     }],
   },
