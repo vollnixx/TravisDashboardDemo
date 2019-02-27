@@ -6,7 +6,7 @@ var myPieChart = new Chart(ctx, {
   data: {
  labels: ["Assertions", "Warnings", "Skipped", "Incomplete"],
     datasets: [{
-		 data: [1231, 20, 123, 222],
+ data: [12, 54, 54, 543],
  			backgroundColor: ['#74B85D', '#92C780', '#BBDCAF', '#D8EBD2'],
 			hoverBackgroundColor: ['#5B854D','#5B854D','#5B854D','#5B854D'],
 			hoverBorderColor: 'rgba(234, 236, 244, 1)',
@@ -34,7 +34,7 @@ var myPieChart2 = new Chart(ctx, {
   data: {
  labels: ["Assertions", "Warnings", "Skipped", "Incomplete"],
     datasets: [{
-		 data: [4141, 20, 42334, 222],
+ data: [21, 21, 23, 43],
  			backgroundColor: ['#74B85D', '#92C780', '#BBDCAF', '#D8EBD2'],
 			hoverBackgroundColor: ['#5B854D','#5B854D','#5B854D','#5B854D'],
 			hoverBorderColor: 'rgba(234, 236, 244, 1)',
@@ -63,7 +63,7 @@ var myPieChart3 = new Chart(ctx, {
   data: {
  labels: ["Assertions", "Warnings", "Skipped", "Incomplete"],
     datasets: [{
-		 data: [6366, 20, 20, 222],
+ data: [23, 42, 21, 22],
  			backgroundColor: ['#74B85D', '#92C780', '#BBDCAF', '#D8EBD2'],
 			hoverBackgroundColor: ['#5B854D','#5B854D','#5B854D','#5B854D'],
 			hoverBorderColor: 'rgba(234, 236, 244, 1)',
