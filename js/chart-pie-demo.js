@@ -1,12 +1,12 @@
 
-// Pie Chart 7.2
-var ctx = document.getElementById("myPieChart");
+// Pie Chart 7.0
+var ctx = document.getElementById("php7.0");
 var myPieChart = new Chart(ctx, {
   type: "doughnut",
   data: {
-    labels: ["Assertions", "Warnings", "Skipped", "Incomplete"],
+    labels: ["Warnings", "Skipped", "Incomplete"],
     datasets: [{
-      data: [12332, 52134, 52134, 32112],
+      data: [ 12, 11, 13],
       			backgroundColor: ['#74B85D', '#92C780', '#BBDCAF', '#D8EBD2'],
 			hoverBackgroundColor: ['#5B854D','#5B854D','#5B854D','#5B854D'],
 			hoverBorderColor: 'rgba(234, 236, 244, 1)',
@@ -28,13 +28,13 @@ options: { maintainAspectRatio: false,
 });
 
 // Pie Chart 7.1
-var ctx = document.getElementById("myPieChart2");
+var ctx = document.getElementById("php7.1");
 var myPieChart2 = new Chart(ctx, {
   type: "doughnut",
   data: {
-    labels: ["Assertions", "Warnings", "Skipped", "Incomplete"],
+    labels: ["Warnings", "Skipped", "Incomplete"],
     datasets: [{
-      data: [21, 21, 23, 43],
+      data: [12, 11, 13],
       			backgroundColor: ['#74B85D', '#92C780', '#BBDCAF', '#D8EBD2'],
 			hoverBackgroundColor: ['#5B854D','#5B854D','#5B854D','#5B854D'],
 			hoverBorderColor: 'rgba(234, 236, 244, 1)',
@@ -56,14 +56,14 @@ options: { maintainAspectRatio: false,
 });
 
 
-// Pie Chart 7.0
-var ctx = document.getElementById("myPieChart3");
+// Pie Chart 7.2
+var ctx = document.getElementById("php7.2");
 var myPieChart3 = new Chart(ctx, {
   type: "doughnut",
   data: {
-    labels: ["Assertions", "Warnings", "Skipped", "Incomplete"],
+    labels: ["Warnings", "Skipped", "Incomplete"],
     datasets: [{
-      data: [24, 42, 21, 22],
+      data: [12, 11, 13],
       			backgroundColor: ['#74B85D', '#92C780', '#BBDCAF', '#D8EBD2'],
 			hoverBackgroundColor: ['#5B854D','#5B854D','#5B854D','#5B854D'],
 			hoverBorderColor: 'rgba(234, 236, 244, 1)',

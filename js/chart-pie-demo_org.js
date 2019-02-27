@@ -1,12 +1,12 @@
 
-// Pie Chart 7.2
-var ctx = document.getElementById("myPieChart");
+// Pie Chart 7.0
+var ctx = document.getElementById("php7.0");
 var myPieChart = new Chart(ctx, {
   ###CHART_TYPE###
   data: {
     ###LABELS###
     datasets: [{
-      ###ILIAS_7.2###
+      ###ILIAS_7.0###
       ###COLORS###
     }],
   },
@@ -14,7 +14,7 @@ var myPieChart = new Chart(ctx, {
 });
 
 // Pie Chart 7.1
-var ctx = document.getElementById("myPieChart2");
+var ctx = document.getElementById("php7.1");
 var myPieChart2 = new Chart(ctx, {
   ###CHART_TYPE###
   data: {
@@ -28,14 +28,14 @@ var myPieChart2 = new Chart(ctx, {
 });
 
 
-// Pie Chart 7.0
-var ctx = document.getElementById("myPieChart3");
+// Pie Chart 7.2
+var ctx = document.getElementById("php7.2");
 var myPieChart3 = new Chart(ctx, {
   ###CHART_TYPE###
   data: {
     ###LABELS###
     datasets: [{
-      ###ILIAS_7.0###
+      ###ILIAS_7.2###
       ###COLORS###
     }],
   },
