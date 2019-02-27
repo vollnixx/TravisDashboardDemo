@@ -6,7 +6,7 @@ var myPieChart = new Chart(ctx, {
   data: {
  labels: ["Assertions", "Warnings", "Skipped", "Incomplete"],
     datasets: [{
- data: [12, 54, 54, 543],
+ data: [12, 54, 54, 3],
  			backgroundColor: ['#74B85D', '#92C780', '#BBDCAF', '#D8EBD2'],
 			hoverBackgroundColor: ['#5B854D','#5B854D','#5B854D','#5B854D'],
 			hoverBorderColor: 'rgba(234, 236, 244, 1)',
