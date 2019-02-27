@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ $# -gt 11 ]; then
+if [ $# -gt 17 ]; then
     PHPUNIT_LABELS='labels: ["Assertions", "Warnings", "Skipped", "Incomplete"],'
     PHPUNIT_TYPE='type: "doughnut",'
 	PHPUNIT_COLORS="\t\t\tbackgroundColor: ['#74B85D', '#92C780', '#BBDCAF', '#D8EBD2'],\n\t\t\thoverBackgroundColor: ['#5B854D','#5B854D','#5B854D','#5B854D'],\n\t\t\thoverBorderColor: 'rgba(234, 236, 244, 1)',"
@@ -13,8 +13,15 @@ if [ $# -gt 11 ]; then
 			s/###CHART_TYPE###/$PHPUNIT_TYPE/g
 			s/###COLORS###/$PHPUNIT_COLORS/g
 			s/###OPTIONS###/$PHPUNIT_OPTIONS/g" js/chart-pie-demo.js 
+
+	sed "s/###DICTO_1###/${13}/
+		 s/###DICTO_2###/${14}/
+		 s/###DICTO_3###/${15}/
+		 s/###DICTO_4###/${16}/
+		 s/###DICTO_5###/${17}/
+		 s/###DICTO_6###/${18}/" index.org.html > index.html 
 else
-    echo "Your command line contains not enough arguments you need 12."
+    echo "Your command line contains not enough arguments you need 18."
     exit 3;
 fi
 
