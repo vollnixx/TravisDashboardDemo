@@ -21,7 +21,10 @@ if [ $# -eq 18 ]; then
 		 s/###DICTO_5###/${17}/
 		 s/###DICTO_6###/${18}/" index.org.html > index.html 
 
-	sed -i "s/###ILIAS_7.0_WARNINGS###/${2}/
+	sed -i "s/###PHP_7.0_URL###/https\:\/\/heise.de/
+			s/###PHP_7.1_URL###/https\:\/\/heise.de/
+			s/###PHP_7.2_URL###/https\:\/\/heise.de/
+			s/###ILIAS_7.0_WARNINGS###/${2}/
 			s/###ILIAS_7.0_SKIPPED###/${3}/
 			s/###ILIAS_7.0_INCOMPLETE###/${4}/
 			s/###ILIAS_7.1_WARNINGS###/${6}/
