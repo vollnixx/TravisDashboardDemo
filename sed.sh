@@ -21,6 +21,16 @@ if [ $# -eq 18 ]; then
 		 s/###DICTO_5###/${17}/
 		 s/###DICTO_6###/${18}/" index.org.html > index.html 
 
+	sed -i "s/###ILIAS_7.0_WARNINGS###/${2}/
+			s/###ILIAS_7.0_SKIPPED###/${3}/
+			s/###ILIAS_7.0_INCOMPLETE###/${4}/
+			s/###ILIAS_7.1_WARNINGS###/${6}/
+			s/###ILIAS_7.1_SKIPPED###/${7}/
+			s/###ILIAS_7.1_INCOMPLETE###/${8}/
+			s/###ILIAS_7.2_WARNINGS###/${10}/
+			s/###ILIAS_7.2_SKIPPED###/${11}/
+			s/###ILIAS_7.2_INCOMPLETE###/${12}/"   index.html 
+
 	sed -i "s/###ILIAS_7.0_Assertions###/${1}/ 
 		 s/###ILIAS_7.1_Assertions###/${5}/ 
 		 s/###ILIAS_7.2_Assertions###/${9}/"   index.html 
