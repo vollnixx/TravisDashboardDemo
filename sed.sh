@@ -3,11 +3,13 @@ if [ $# -eq 18 ]; then
     PHPUNIT_LABELS='labels: ["Warnings", "Skipped", "Incomplete"],'
     PHPUNIT_TYPE='type: "doughnut",'
 	PHPUNIT_COLORS="\t\t\tbackgroundColor: ['#74B85D', '#92C780', '#BBDCAF', '#D8EBD2'],\n\t\t\thoverBackgroundColor: ['#5B854D','#5B854D','#5B854D','#5B854D'],\n\t\t\thoverBorderColor: 'rgba(234, 236, 244, 1)',"
-	PHPUNIT_OPTIONS="options: { maintainAspectRatio: false,\n\t\ttooltips: \n\t\t\t{backgroundColor: 'rgb(0,255,255)',\n\t\t\tbodyFontColor:'#858796',\n\t\t\tborderColor: '#dddfeb',\n\t\t\tborderWidth: 1,\n\t\t\txPadding: 15,\n\t\t\tyPadding: 15,\n\t\t\tdisplayColors: false,\n\t\t\tcaretPadding: 10,\n\t\t\tbodyFontFamily: 'sans-serif',},\n\t\t\tlegend: {display: false},\n\t\t\tcutoutPercentage: 60,},"
+	PHPUNIT_COLORS_FAIL="\t\t\tbackgroundColor: ['#c7372b', '#e20201', '#f33a2f', '#fa6553'],\n\t\t\thoverBackgroundColor: ['#b52f28','#b52f28','#b52f28','#b52f28'],\n\t\t\thoverBorderColor: 'rgba(234, 236, 244, 1)',"
+	PHPUNIT_OPTIONS="options: {elements: {center: {text: 'Tests: 5400',color: '#212529', fontStyle: 'Helvetica', sidePadding: 20 }}, maintainAspectRatio: false,\n\t\ttooltips: \n\t\t\t{backgroundColor: 'rgb(0,255,255)',\n\t\t\tbodyFontColor:'#858796',\n\t\t\tborderColor: '#dddfeb',\n\t\t\tborderWidth: 1,\n\t\t\txPadding: 15,\n\t\t\tyPadding: 15,\n\t\t\tdisplayColors: false,\n\t\t\tcaretPadding: 10,\n\t\t\tbodyFontFamily: 'sans-serif',},\n\t\t\tlegend: {display: false},\n\t\t\tcutoutPercentage: 60,},"
 
 	sed "s/###LABELS###/$PHPUNIT_LABELS/g
 		 s/###CHART_TYPE###/$PHPUNIT_TYPE/g
 		 s/###COLORS###/$PHPUNIT_COLORS/g
+		 s/###COLORS_FAIL###/$PHPUNIT_COLORS_FAIL/g
 		 s/###OPTIONS###/$PHPUNIT_OPTIONS/g" js/chart-pie-demo_org.js > js/chart-pie-demo.js
 
 	sed -i "s/###ILIAS_7.0###/data: [ ${2}, ${3}, ${4}],/
