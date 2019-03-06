@@ -15,108 +15,103 @@
 <body>
 <div class="sidebar">
   <h1 class="headersidenav">ILIAS Dashboard</h1>
-  <a class="active" href="#travis">Travis CI</a> <a href="#dicto">Dicto</a> </div>
+  <a class="active" href="#travis">Travis CI</a> <a href="#dicto">Dicto</a> 
+    <img class="iliaslogo" src="icon/ILIAS Logo Web.png" alt="ILIAS Logo">
+    </div>
 <div class="content">
-		<div class="row justify-content-end">
-	<img class="iliaslogo" src="icon/ILIAS Logo Web.png" alt="ILIAS Logo">
-		</div>
   <div class="row">
     <div class="col-md-12">
       <h2 class="travis">Travis CI</h2>
     </div>
     
-    <!-- Pie Chart 7.2-->
-    <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
-      <div class="card shadow mb-4"> 
+   <!-- Pie Chart 7.2-->
+    <a href="###PHP_7.0_URL###" class="col-xl-4 col-lg-5" target="_blank">
+      <div class="col-xl-12">
+        <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6>PHP 7.0</h6>
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="chart-pie pt-6 pb-2">
+                  <canvas id="php7.0"></canvas>
+                </div>
+              </div>
+              <div class="col-md-4 ">
+                <div class="mt-4 text-left small ">
+                  <p class="mr-2"><i class="fas fa-circle text-warnings"></i> ###ILIAS_7.0_WARNINGS### Warnings </p>
+                  <p class="mr-2"><i class="fas fa-circle text-skipped"></i> ###ILIAS_7.0_SKIPPED### Skipped </p>
+                  <p class="mr-2"><i class="fas fa-circle text-incomplete"></i> ###ILIAS_7.0_INCOMPLETE### Incomplete </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 text-center small">###ILIAS_7.0_Assertions### Assertions</div>          
+          </div>
+        </div>
+      </div>
+  </a>
+    <!-- Pie Chart 7.1 -->
+    <a href="###PHP_7.1_URL###" class="col-xl-4 col-lg-5" target="_blank">
+      <div class="col-xl-12">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6>PHP 7.1 <span class="badge badge-pill badge-danger">Danger</span></h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="chart-pie pt-6 pb-2">
+                <canvas id="php7.1"></canvas>
+              </div>
+            </div>
+            <div class="col-md-4 ">
+              <div class="mt-4 text-left small ">
+                <p class="mr-2"><i class="fas fa-circle text-warnings-warning"></i> ###ILIAS_7.1_WARNINGS### Warnings </p>
+                <p class="mr-2"><i class="fas fa-circle text-skipped-warning"></i> ###ILIAS_7.1_SKIPPED### Skipped </p>
+                <p class="mr-2"><i class="fas fa-circle text-incomplete-warning"></i> ###ILIAS_7.1_INCOMPLETE### Incomplete </p>
+              </div>
+            </div>
+            <div class="col-md-12 text-center small">###ILIAS_7.1_Assertions### Assertions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+ </a>
+    
+ <!-- Pie Chart 7.0 -->
+    <a href="###PHP_7.2_URL###" class="col-xl-4 col-lg-5" target="_blank">
+      <div class="col-xl-12">
+      <div class="card shadow mb-4">
         <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6>PHP 7.2</h6>
-          <div class="dropdown"><a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> KW 1 </a>
-            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink"> <a class="dropdown-item" href="#">KW 2</a> <a class="dropdown-item" href="#">KW 3</a> <a class="dropdown-item" href="#">KW 4</a> </div>
-          </div>
         </div>
         <!-- Card Body -->
         <div class="card-body">
           <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-8 col-12">
               <div class="chart-pie pt-6 pb-2">
-                <canvas id="myPieChart"></canvas>
+                <canvas id="php7.2"></canvas>
               </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-4 ">
               <div class="mt-4 text-left small ">
-                <p class="mr-2"> <i class="fas fa-circle text-assertations"></i> Assertations </p>
-                <p class="mr-2"> <i class="fas fa-circle text-warnings"></i> Warnings </p>
-                <p class="mr-2"> <i class="fas fa-circle text-skipped"></i> Skipped </p>
-                <p class="mr-2"> <i class="fas fa-circle text-incomplete"></i> Incomplete </p>
+                <p class="mr-2"><i class="fas fa-circle text-warnings"></i> ###ILIAS_7.2_WARNINGS### Warnings </p>
+                <p class="mr-2"><i class="fas fa-circle text-skipped"></i> ###ILIAS_7.2_SKIPPED### Skipped </p>
+                <p class="mr-2"><i class="fas fa-circle text-incomplete"></i> ###ILIAS_7.2_INCOMPLETE### Incomplete </p>
               </div>
             </div>
+            <div class="col-md-12 text-center small">###ILIAS_7.2_Assertions### Assertions</div>
           </div>
         </div>
       </div>
     </div>
-    
-    <!-- Pie Chart 7.1 -->
-    <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
-      <div class="card shadow mb-4"> 
-        <!-- Card Header - Dropdown -->
-        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h6>PHP 7.1<span class="badge badge-pill badge-danger">Danger</span></h6>
-          <div class="dropdown"><a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> KW 1 </a>
-            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink"> <a class="dropdown-item" href="#">KW 2</a> <a class="dropdown-item" href="#">KW 3</a> <a class="dropdown-item" href="#">KW 4</a> </div>
-          </div>
-        </div>
-        <!-- Card Body -->
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-7">
-              <div class="chart-pie pt-6 pb-2">
-                <canvas id="myPieChart2"></canvas>
-              </div>
-            </div>
-            <div class="col-md-5">
-              <div class="mt-4 text-left small ">
-                <p class="mr-2"> <i class="fas fa-circle text-assertations-warning"></i> Assertations </p>
-                <p class="mr-2"> <i class="fas fa-circle text-warnings-warning"></i> Warnings </p>
-                <p class="mr-2"> <i class="fas fa-circle text-skipped-warning"></i> Skipped </p>
-                <p class="mr-2"> <i class="fas fa-circle text-incomplete-warning"></i> Incomplete </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Pie Chart 7.0 -->
-    <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
-      <div class="card shadow mb-4"> 
-        <!-- Card Header - Dropdown -->
-        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h6>PHP 7.0</h6>
-          <div class="dropdown"><a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> KW 1 </a>
-            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink"> <a class="dropdown-item" href="#">KW 2</a> <a class="dropdown-item" href="#">KW 3</a> <a class="dropdown-item" href="#">KW 4</a> </div>
-          </div>
-        </div>
-        <!-- Card Body -->
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-7 col-12">
-              <div class="chart-pie pt-6 pb-2">
-                <canvas id="myPieChart3"></canvas>
-              </div>
-            </div>
-            <div class="col-md-5">
-              <div class="mt-4 text-left small ">
-                <p class="mr-2"> <i class="fas fa-circle text-assertations"></i> Assertations </p>
-                <p class="mr-2"> <i class="fas fa-circle text-warnings"></i> Warnings </p>
-                <p class="mr-2"> <i class="fas fa-circle text-skipped"></i> Skipped </p>
-                <p class="mr-2"> <i class="fas fa-circle text-incomplete"></i> Incomplete </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </a>  
   </div>
   <div class="row mt-5">
     <div class="col-lg-12">

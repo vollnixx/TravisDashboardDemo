@@ -119,10 +119,12 @@ span.badge.badge-pill.badge-danger {
 }
 
 .iliaslogo {
-	height: 70px;
-	width: auto;
-	    margin-right: 15px;
-    margin-left: 15px;
+	height: 15%;
+     width: auto;
+    margin-right: 45px;
+    margin-left: 55px;
+    bottom: 25px;
+    position: absolute;
 }
 
 
