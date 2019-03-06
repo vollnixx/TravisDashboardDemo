@@ -85,7 +85,10 @@ div.content {
 	color: white;
 }
 
-
+span.badge.badge-pill.badge-danger {
+    font-size: 60%;
+	margin-left: 8px;
+}
 
 
 .travis:before {
@@ -98,6 +101,13 @@ div.content {
     margin: 3px 6px 0 0;
 }
 
+.testo{
+	position: absolute;
+	right: 10px;
+	
+}
+
+
 .dicto:before {
 	content: "";
     display: block;
@@ -106,6 +116,13 @@ div.content {
     height: 32px;
     float: left;
     margin: 3px 6px 0 0;
+}
+
+.iliaslogo {
+	height: 70px;
+	width: auto;
+	    margin-right: 15px;
+    margin-left: 15px;
 }
 
 
@@ -128,6 +145,21 @@ color: #D8EBD2;
 }
 
 
+.text-assertations-warning {
+color: #c7372b;	
+}
+
+.text-warnings-warning {
+color: #e20201;	
+}
+
+.text-skipped-warning {
+color: #f33a2f;	
+}
+
+.text-incomplete-warning {
+color: #fa6553;	
+}
 
 
 

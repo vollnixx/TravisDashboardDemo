@@ -1,174 +1,169 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- eigenes Stylesheet -->
-  <link rel="stylesheet" href="css/stylesheet.css">
-  <!-- Screen -->
-  <link href="css/screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
-  <!-- Fontawesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <title>ILIAS Dashboard</title>
+<!-- eigenes Stylesheet -->
+<link rel="stylesheet" href="css/stylesheet.css">
+<!-- Screen -->
+<link href="css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<!-- Fontawesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<title>ILIAS Dashboard</title>
 </head>
 <body>
 <div class="sidebar">
   <h1 class="headersidenav">ILIAS Dashboard</h1>
-  <a class="active" href="#travis">Travis CI</a> <a href="#dicto">Dicto</a></div>
+  <a class="active" href="#travis">Travis CI</a> <a href="#dicto">Dicto</a> </div>
 <div class="content">
+		<div class="row justify-content-end">
+	<img class="iliaslogo" src="icon/ILIAS Logo Web.png" alt="ILIAS Logo">
+		</div>
   <div class="row">
     <div class="col-md-12">
       <h2 class="travis">Travis CI</h2>
     </div>
-
+    
     <!-- Pie Chart 7.2-->
-    <a href="https://heise.de" class="col-xl-4 col-lg-5" target="_blank">
-      <div class="col-xl-12">
-        <div class="card shadow mb-4">
-          <!-- Card Header - Dropdown -->
-          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6>PHP 7.0</h6>
-          </div>
-          <!-- Card Body -->
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-8">
-                <div class="chart-pie pt-6 pb-2">
-                  <canvas id="php7.0"></canvas>
-                </div>
-              </div>
-              <div class="col-md-4 ">
-                <div class="mt-4 text-left small ">
-                  <p class="mr-2"><i class="fas fa-circle text-warnings"></i> 14 Warnings </p>
-                  <p class="mr-2"><i class="fas fa-circle text-skipped"></i> 13 Skipped </p>
-                  <p class="mr-2"><i class="fas fa-circle text-incomplete"></i> 13 Incomplete </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12 text-center small">2220 Assertions</div>          
-          </div>
-        </div>
-      </div>
-  </a>
-    <!-- Pie Chart 7.1 -->
-    <a href="https://heise.de" class="col-xl-4 col-lg-5" target="_blank">
-      <div class="col-xl-12">
-      <div class="card shadow mb-4">
-        <!-- Card Header - Dropdown -->
-        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h6>PHP 7.1</h6>
-        </div>
-        <!-- Card Body -->
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-8">
-              <div class="chart-pie pt-6 pb-2">
-                <canvas id="php7.1"></canvas>
-              </div>
-            </div>
-            <div class="col-md-4 ">
-              <div class="mt-4 text-left small ">
-                <p class="mr-2"><i class="fas fa-circle text-warnings"></i> 12 Warnings </p>
-                <p class="mr-2"><i class="fas fa-circle text-skipped"></i> 11 Skipped </p>
-                <p class="mr-2"><i class="fas fa-circle text-incomplete"></i> 13 Incomplete </p>
-              </div>
-            </div>
-            <div class="col-md-12 text-center small">213210 Assertions</div>
-          </div>
-        </div>
-      </div>
-    </div>
- </a>
-
-    <!-- Pie Chart 7.0 -->
-    <a href="https://heise.de" class="col-xl-4 col-lg-5" target="_blank">
-      <div class="col-xl-12">
-      <div class="card shadow mb-4">
+    <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+      <div class="card shadow mb-4"> 
         <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6>PHP 7.2</h6>
+          <div class="dropdown"><a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> KW 1 </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink"> <a class="dropdown-item" href="#">KW 2</a> <a class="dropdown-item" href="#">KW 3</a> <a class="dropdown-item" href="#">KW 4</a> </div>
+          </div>
         </div>
         <!-- Card Body -->
         <div class="card-body">
           <div class="row">
-            <div class="col-md-8 col-12">
+            <div class="col-md-7">
               <div class="chart-pie pt-6 pb-2">
-                <canvas id="php7.2"></canvas>
+                <canvas id="myPieChart"></canvas>
               </div>
             </div>
-            <div class="col-md-4 ">
+            <div class="col-md-5">
               <div class="mt-4 text-left small ">
-                <p class="mr-2"><i class="fas fa-circle text-warnings"></i> 12 Warnings </p>
-                <p class="mr-2"><i class="fas fa-circle text-skipped"></i> 11 Skipped </p>
-                <p class="mr-2"><i class="fas fa-circle text-incomplete"></i> 13 Incomplete </p>
+                <p class="mr-2"> <i class="fas fa-circle text-assertations"></i> Assertations </p>
+                <p class="mr-2"> <i class="fas fa-circle text-warnings"></i> Warnings </p>
+                <p class="mr-2"> <i class="fas fa-circle text-skipped"></i> Skipped </p>
+                <p class="mr-2"> <i class="fas fa-circle text-incomplete"></i> Incomplete </p>
               </div>
             </div>
-            <div class="col-md-12 text-center small">213210 Assertions</div>
           </div>
         </div>
       </div>
     </div>
-    </a>  
+    
+    <!-- Pie Chart 7.1 -->
+    <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+      <div class="card shadow mb-4"> 
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6>PHP 7.1<span class="badge badge-pill badge-danger">Danger</span></h6>
+          <div class="dropdown"><a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> KW 1 </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink"> <a class="dropdown-item" href="#">KW 2</a> <a class="dropdown-item" href="#">KW 3</a> <a class="dropdown-item" href="#">KW 4</a> </div>
+          </div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-7">
+              <div class="chart-pie pt-6 pb-2">
+                <canvas id="myPieChart2"></canvas>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="mt-4 text-left small ">
+                <p class="mr-2"> <i class="fas fa-circle text-assertations-warning"></i> Assertations </p>
+                <p class="mr-2"> <i class="fas fa-circle text-warnings-warning"></i> Warnings </p>
+                <p class="mr-2"> <i class="fas fa-circle text-skipped-warning"></i> Skipped </p>
+                <p class="mr-2"> <i class="fas fa-circle text-incomplete-warning"></i> Incomplete </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Pie Chart 7.0 -->
+    <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+      <div class="card shadow mb-4"> 
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6>PHP 7.0</h6>
+          <div class="dropdown"><a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> KW 1 </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink"> <a class="dropdown-item" href="#">KW 2</a> <a class="dropdown-item" href="#">KW 3</a> <a class="dropdown-item" href="#">KW 4</a> </div>
+          </div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-7 col-12">
+              <div class="chart-pie pt-6 pb-2">
+                <canvas id="myPieChart3"></canvas>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="mt-4 text-left small ">
+                <p class="mr-2"> <i class="fas fa-circle text-assertations"></i> Assertations </p>
+                <p class="mr-2"> <i class="fas fa-circle text-warnings"></i> Warnings </p>
+                <p class="mr-2"> <i class="fas fa-circle text-skipped"></i> Skipped </p>
+                <p class="mr-2"> <i class="fas fa-circle text-incomplete"></i> Incomplete </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="row mt-5">
     <div class="col-lg-12">
       <h2 class="dicto">Dicto</h2>
     </div>
-
+    
     <!-- Dicto Kachel 1 -->
     <div class="col-xl-6 col-lg-6">
-      <div class="card shadow mb-4">
+      <div class="card shadow mb-4"> 
         <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h6>Dicto 25.02.1019</h6>
+          <h6>Dicto KW 1</h6>
+          <div class="dropdown"><a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> KW 1 </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink"> <a class="dropdown-item" href="#">KW 2</a> <a class="dropdown-item" href="#">KW 3</a> <a class="dropdown-item" href="#">KW 4</a> </div>
+          </div>
         </div>
         <!-- Card Body -->
-        <div class="card-body d-flex justify-content-between"> 
-          <span class="">
-            <a class="badge badge-pill badge-warning mr-2" href="#">332432</a>
-          Total</span>
-          <span class="">
-            <a class="badge badge-pill badge-success mr-2" href="#">456</a>
-          Resolved</span>
-          <span class=""><a class="badge badge-pill badge-danger mr-2" href="#">2</a>
-          Added</span>
-        </div>
+        <div class="card-body d-flex justify-content-between"> <span class=""><a class="badge badge-pill badge-success mr-2" href="#">250</a>Success</span> <span class=""><a class="badge badge-pill badge-success mr-2" href="#">250</a>Success</span> <span class=""><a class="badge badge-pill badge-success mr-2" href="#">250</a>Success</span> </div>
       </div>
     </div>
-
+    
     <!-- Dicto Kachel 2 -->
     <div class="col-xl-6 col-lg-6">
-      <div class="card shadow mb-4">
+      <div class="card shadow mb-4"> 
         <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h6>Dicto 18.02.2019</h6>
+          <h6>Dicto KW 1</h6>
+          <div class="dropdown"><a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> KW 1 </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink"> <a class="dropdown-item" href="#">KW 2</a> <a class="dropdown-item" href="#">KW 3</a> <a class="dropdown-item" href="#">KW 4</a> </div>
+          </div>
         </div>
         <!-- Card Body -->
-        <div class="card-body d-flex justify-content-between"> 
-          <span class="">
-            <a class="badge badge-pill badge-warning mr-2" href="#">234</a>
-          Total</span>
-          <span class="">
-            <a class="badge badge-pill badge-success mr-2" href="#">654</a>
-          Resolved</span>
-          <span class=""><a class="badge badge-pill badge-danger mr-2" href="#">434</a>
-          Added</span>
-        </div>
+        <div class="card-body d-flex justify-content-between"> <span class=""><a class="badge badge-pill badge-success mr-2" href="#">250</a>Success</span> <span class=""><a class="badge badge-pill badge-success mr-2" href="#">250</a>Success</span> <span class=""><a class="badge badge-pill badge-success mr-2" href="#">250</a>Success</span> </div>
       </div>
     </div>
   </div>
 </div>
+<!-- jQuery first, then Popper.js, then Bootstrap JS --> 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script> 
 
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<!-- Page level plugins --> 
+<script src="vendor/chart.js/Chart.min.js"></script> 
 
-<!-- Page level plugins -->
-<script src="vendor/chart.js/Chart.min.js"></script>
-
-<!-- Chart scripts -->
+<!-- Chart scripts --> 
+<script src="js/chart-area-demo.js"></script> 
 <script src="js/chart-pie-demo.js"></script>
 </body>
 </html>
