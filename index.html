@@ -27,14 +27,14 @@
    <!-- Pie Chart 7.2-->
     <a href="https://heise.de" class="col-xl-4 col-lg-5" target="_blank">
       <div class="col-xl-12">
-        <div class="card shadow mb-4">
+        <div class="card shadow mb-4" id="php7_0_card">
           <!-- Card Header - Dropdown -->
           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6>PHP 7.0</h6>
           </div>
           <!-- Card Body -->
-          <div class="card-body">
-            <div class="row">
+          <div class="card-body phpunit">
+            <div class="row hidden">
               <div class="col-md-8">
                 <div class="chart-pie pt-6 pb-2">
                   <canvas id="php7.0"></canvas>
@@ -56,14 +56,14 @@
     <!-- Pie Chart 7.1 -->
     <a href="https://heise.de" class="col-xl-4 col-lg-5" target="_blank">
       <div class="col-xl-12">
-      <div class="card shadow mb-4">
+      <div class="card shadow mb-4" id="php7_1_card">
         <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h6>PHP 7.1 <span class="badge badge-pill badge-danger">Danger</span></h6>
+          <h6>PHP 7.1</h6>
         </div>
         <!-- Card Body -->
-        <div class="card-body">
-          <div class="row">
+        <div class="card-body phpunit" >
+          <div class="row hidden">
             <div class="col-md-8">
               <div class="chart-pie pt-6 pb-2">
                 <canvas id="php7.1"></canvas>
@@ -85,14 +85,14 @@
  <!-- Pie Chart 7.0 -->
     <a href="https://heise.de" class="col-xl-4 col-lg-5" target="_blank">
       <div class="col-xl-12">
-      <div class="card shadow mb-4">
+      <div class="card shadow mb-4" id="php7_2_card">
         <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6>PHP 7.2</h6>
         </div>
         <!-- Card Body -->
-        <div class="card-body">
-          <div class="row">
+        <div class="card-body phpunit">
+          <div class="row hidden">
             <div class="col-md-8 col-12">
               <div class="chart-pie pt-6 pb-2">
                 <canvas id="php7.2"></canvas>
@@ -168,7 +168,43 @@
 <script src="vendor/chart.js/Chart.min.js"></script> 
 
 <!-- Chart scripts --> 
-<script src="js/chart-area-demo.js"></script> 
 <script src="js/chart-pie-demo.js"></script>
+<script>
+  SimpleILIASDashboard = (function (scope) {
+  'use strict';
+  let pub = {};
+
+
+  pub.replaceLoaderSymbolForCard = function (card_id, state) {
+    let card_object = $('#' + card_id)
+
+    if(state === "failed") {
+      card_object.find('.card-header h6').html(card_object.find('.card-header h6').html() + '<span class="badge badge-pill badge-danger">Danger</span>');
+    }
+    card_object.find('.phpunit').removeClass("phpunit");
+    card_object.find(".row").removeClass("hidden");
+  };
+
+  return pub;
+
+}());
+
+  $('.card-header').find('.badge-danger').remove();
+let first = setInterval(function(){ 
+  SimpleILIASDashboard.replaceLoaderSymbolForCard("php7_1_card", "failed");
+  clearInterval(first);
+}, 1000);
+
+let second = setInterval(function(){ 
+  SimpleILIASDashboard.replaceLoaderSymbolForCard("php7_0_card");
+  clearInterval(second);
+}, 1300);
+
+let third = setInterval(function(){ 
+  SimpleILIASDashboard.replaceLoaderSymbolForCard("php7_2_card");
+  clearInterval(third);
+}, 2000);
+
+</script>
 </body>
 </html>
