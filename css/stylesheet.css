@@ -225,3 +225,7 @@ color: #c7372b;
 .col-xl-4{
   float:left;
 }
+
+.list-group-item {
+  background-color: #17295f !important;
+}

@@ -1,6 +1,7 @@
 SimpleILIASDashboard = (function () {
   'use strict';
-  let pub = {}, pri = {
+
+  let pub = {}, pro = {}, pri = {
     danger_span:   '<span class="badge badge-pill badge-danger">Danger</span>',
     success_span:   '<span class="badge badge-pill badge-success">Success</span>',
     background_colors_success : "['#D8EBD2', '#92C780', '#BBDCAF', '#74B85D']",
@@ -36,10 +37,10 @@ SimpleILIASDashboard = (function () {
                   ' </div>' +
                   ' <div class="col-md-4 ">' +
                     ' <div class="mt-4 text-left small ">' +
-                      pri.html_snippets.phpunit_state_html + ' text-warnings' + failed + '"></i> ' + warn + ' Warnings </p>' +
-                      pri.html_snippets.phpunit_state_html + ' text-skipped' + failed + '"></i> ' + skip + ' Skipped </p>' +
+                      pri.html_snippets.phpunit_state_html + ' text-warnings'   + failed + '"></i> ' + warn + ' Warnings </p>' +
+                      pri.html_snippets.phpunit_state_html + ' text-skipped'    + failed + '"></i> ' + skip + ' Skipped </p>' +
                       pri.html_snippets.phpunit_state_html + ' text-incomplete' + failed + '"></i> ' + incomp + ' Incomplete </p>' +
-                      pri.html_snippets.phpunit_state_html + ' text-failed' + failed + '"></i> ' + fail + ' Failed </p>' +
+                      pri.html_snippets.phpunit_state_html + ' text-failed'     + failed + '"></i> ' + fail + ' Failed </p>' +
                     ' </div>' + 
                   ' </div>' +
                 ' </div>' + 
@@ -59,7 +60,7 @@ SimpleILIASDashboard = (function () {
               '<div class="card-body d-flex justify-content-between">' + 
                 pri.html_snippets.dicto_state_html + ' badge-warning mr-2" href="#">' + total + ' Total</a> </span>' +
                 pri.html_snippets.dicto_state_html + ' badge-success mr-2" href="#">' + resolved + ' Resolved</a> </span>' +
-                pri.html_snippets.dicto_state_html + ' badge-danger mr-2" href="#">' + added + ' Added</a> </span>' +
+                pri.html_snippets.dicto_state_html + ' badge-danger mr-2" href="#">'  + added + ' Added</a> </span>' +
               '</div>' +
             '</div>' +
           '</div>';
@@ -69,6 +70,7 @@ SimpleILIASDashboard = (function () {
  pub.initialiseGraph = function (card_id, card_object, failure, warn, skip, incomp, failed, complete) {
    let card_cleaned_id = card_id.split("_card")[0];
    let backgroundColor = pri.background_colors_success;
+
    if (failure === "true") {
          backgroundColor = pri.background_colors_fail;
    }
@@ -92,19 +94,21 @@ SimpleILIASDashboard = (function () {
     let card_object = $('#' + card_id);
 
     if (failure === "true") {
-      card_object.find(pri.html_snippets.card_header).html(
-        card_object.find(pri.html_snippets.card_header).html() + pri.danger_span
-      );
+      pro.addPHPUnitHeader(card_object, pri.danger_span);
     }
     else {
-      card_object.find(pri.html_snippets.card_header).html(
-        card_object.find(pri.html_snippets.card_header).html() + pri.success_span
-      );
+      pro.addPHPUnitHeader(card_object, pri.success_span);
     }
 
     card_object.find('.phpunit').removeClass('phpunit');
     card_object.find('.row').removeClass('hidden');
     pub.initialiseGraph(card_id, card_object, failure, warn, skip, incomp, failed, complete);
+  };
+
+  pro.addPHPUnitHeader = function(card_object, state) {
+    card_object.find(pri.html_snippets.card_header).html(
+        card_object.find(pri.html_snippets.card_header).html() + state
+      );
   };
 
   pub.createPHPUnitWidgets = function (data) {
@@ -171,7 +175,9 @@ SimpleILIASDashboard = (function () {
   
   }());
 
-$('.card-header').find('.badge-danger').remove();
-
-SimpleILIASDashboard.startPHPUnitDummySimulation();
-SimpleILIASDashboard.startDictoDummySimulation();
+$( document ).ready(function() {
+    $('.card-header').find('.badge-danger').remove();
+    SimpleILIASDashboard.startPHPUnitDummySimulation();
+    SimpleILIASDashboard.startDictoDummySimulation();
+    $('body').scrollspy({ target: '#nav_list' });
+});
