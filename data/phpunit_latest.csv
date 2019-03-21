@@ -1,3 +1,7 @@
-http://heise.de,php7_0,PHP 7.0,32,234,234,true
-http://heise.de,php7_1,PHP 7.1,132,23,45,false
-http://heise.de,php7_2,PHP 7.2,213,3451,345,true
+http://heise.de,trunk,php7_0,PHP 7.0,12,2,234,true
+http://heise.de,trunk,php7_1,PHP 7.1,2,23,45,false
+http://heise.de,trunk,php7_2,PHP 7.2,213,3451,345,true
+http://heise.de,5_3,php7_0,PHP 7.0,12,2,234,true
+http://heise.de,5_4,php7_1,PHP 7.1,2,23,666,false
+http://heise.de,5_3,php7_1,PHP 7.1,2,23,663,false
+http://heise.de,5_4,php7_2,PHP 7.2,213,3451,345,true
