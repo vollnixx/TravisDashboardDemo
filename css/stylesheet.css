@@ -156,6 +156,9 @@ color: #BBDCAF;
 color: #D8EBD2;	
 }
 
+.text-failed {
+color: #c7372b; 
+}
 
 .text-assertations-warning {
 color: #c7372b;	
@@ -171,6 +174,10 @@ color: #f33a2f;
 
 .text-incomplete-warning {
 color: #fa6553;	
+}
+
+.text-failed-warning {
+color: #c7372b; 
 }
 
 
