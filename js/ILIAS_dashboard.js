@@ -2,16 +2,16 @@ SimpleILIASDashboard = (function () {
   'use strict';
 
   let pub = {}, pro = {}, pri = {
-    danger_span:   '<span class="badge badge-pill badge-danger">Danger</span>',
-    success_span:   '<span class="badge badge-pill badge-success">Success</span>',
+    danger_span               : '<span class="badge badge-pill badge-danger">Danger</span>',
+    success_span              : '<span class="badge badge-pill badge-success">Success</span>',
     background_colors_success : "['#D8EBD2', '#92C780', '#BBDCAF', '#74B85D']",
-    background_colors_fail : "['#fa6553', '#e20201', '#f33a2f', '#c7372b']",
-    html_snippets: {
-      card_header:              '.card-header h6',
-      phpunit_date_class:       '.phpunit_date',
-      phpunit_state_html:       '<p class="mr-2"><i class="fas fa-circle',
-      dicto_state_html:         '<span class=""><a class="badge badge-pill',
-      card_header_html_begin:   '<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">'
+    background_colors_fail    : "['#fa6553', '#e20201', '#f33a2f', '#c7372b']",
+    html_snippets : {
+      card_header             : '.card-header h6',
+      phpunit_date_class      : '.phpunit_date',
+      phpunit_state_html      : '<p class="mr-2"><i class="fas fa-circle',
+      dicto_state_html        : '<span class=""><a class="badge badge-pill',
+      card_header_html_begin  : '<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">'
     }
   };
 
@@ -79,12 +79,13 @@ SimpleILIASDashboard = (function () {
         'let ctx = document.getElementById("' + card_cleaned_id +'");'+
         'let myPieChart = new Chart(ctx, {'+
         ' type: "doughnut", data: { labels: ["Warnings", "Skipped", "Incomplete", "Failed"],'+
-        '   datasets: [{data: [ '+ warn +', '+ skip +', '+ incomp +', '+ failed +',], backgroundColor: ' + backgroundColor + ', hoverBackgroundColor: ["#ffa500","#ffa500","#ffa500","#ffa500"], hoverBorderColor: "rgba(234, 236, 244, 1)",}],'+
+        '   datasets: [{data: [ '+ warn +', '+ skip +', '+ incomp +', '+ failed +',], backgroundColor: ' + backgroundColor + 
+                      ', hoverBackgroundColor: ["#ffa500","#ffa500","#ffa500","#ffa500"], hoverBorderColor: "rgba(234, 236, 244, 1)",}],'+
         ' },'+
         ' options: {elements: {center: {text: "Tests: ' + complete + '",color: "#212529", fontStyle: "Helvetica", sidePadding: 20 }}, maintainAspectRatio: false,'+
         '   tooltips:{backgroundColor: "rgb(0,255,255)",bodyFontColor:"#858796",borderColor: "#dddfeb",borderWidth: 1,xPadding: 15,yPadding: 15,displayColors: false,caretPadding: 10,bodyFontFamily: "sans-serif",},'+
-   '   legend: {display: false},cutoutPercentage: 60,},'+
-   '});'+
+        '   legend: {display: false},cutoutPercentage: 60,},'+
+        '});'+
         '});</script>');
 
 
@@ -118,17 +119,25 @@ SimpleILIASDashboard = (function () {
 
     for (let singleRow = 0; singleRow < allRows.length; singleRow++) {
       let cells = allRows[singleRow].split(',');
-      let url = cells[0], version = 'ILIAS_' + cells[1], id = cells[2], 
-          title = cells[3], warn = cells[4], skip = cells[5], incomp = cells[6],
-          complete = cells[7], failed = cells[8], failure = cells[9];
+      let url       = cells[0], 
+          version   = cells[1],
+          id        = cells[2], 
+          title     = cells[3], 
+          warn      = cells[4], 
+          skip      = cells[5], 
+          incomp    = cells[6],
+          complete  = cells[7], 
+          failed    = cells[8], 
+          failure   = cells[9];
+      let version_string = 'ILIAS_' + version;
 
-      if( $('.phpunit_data').find('.' + version).length === 0) {
-         $('.phpunit_data').append('<div class="' + version + ' col-md-12"><h4>' + version + '</h4></div>')
+      if( $('.phpunit_data').find('.' + version_string).length === 0) {
+         $('.phpunit_data').append('<div class="' + version_string + ' col-md-12"><h4>' + version_string + '</h4></div>')
       }
-      $('.phpunit_data .' + version).append(pub.createPHPUnitWidget(url, version, id, title, warn, skip, incomp, failed, failure));
+      $('.phpunit_data .' + version_string).append(pub.createPHPUnitWidget(url, version_string, id, title, warn, skip, incomp, failed, failure));
 
       let interval = setInterval(function () {
-        SimpleILIASDashboard.replaceLoaderSymbolForPHPUnitCard(version + '_' + id + "_card", failure, warn, skip, incomp, failed, complete);
+        SimpleILIASDashboard.replaceLoaderSymbolForPHPUnitCard(version_string + '_' + id + "_card", failure, warn, skip, incomp, failed, complete);
         
         clearInterval(interval);
       }, Math.random() * 1000);
@@ -148,7 +157,7 @@ SimpleILIASDashboard = (function () {
     location.reload();
   };
 
-  pub.startPHPUnitDummySimulation = function () {
+  pub.getPHPUnitData = function () {
 
     $.ajax({
       url:      'data/phpunit_latest.csv',
@@ -159,7 +168,7 @@ SimpleILIASDashboard = (function () {
       }, Math.random() * 5000); });
   };
 
-    pub.startDictoDummySimulation = function () {
+    pub.getDictoData = function () {
 
     $.ajax({
       url:      'data/dicto_latest.csv',
@@ -177,7 +186,7 @@ SimpleILIASDashboard = (function () {
 
 $( document ).ready(function() {
     $('.card-header').find('.badge-danger').remove();
-    SimpleILIASDashboard.startPHPUnitDummySimulation();
-    SimpleILIASDashboard.startDictoDummySimulation();
+    SimpleILIASDashboard.getPHPUnitData();
+    SimpleILIASDashboard.getDictoData();
     $('body').scrollspy({ target: '#nav_list' });
 });

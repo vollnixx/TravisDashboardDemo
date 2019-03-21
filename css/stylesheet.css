@@ -47,7 +47,7 @@ src: url("../fonts/Asap-Bold.ttf");
   margin: 0;
   padding: 0;
   width: 260px;
-  background-color: #213982;
+  background-color: #003a66;
   position: fixed;
   height: 100%;
   overflow: auto;
@@ -92,8 +92,8 @@ span.badge.badge-pill.badge-danger {
 
 .badge-success {
     color: #212529;
-    background-color: #3dff00 !important;
-}
+    background-color: #87ff61 !important
+  }
 
 span.badge.badge-pill.badge-success {
     font-size: 60%;
@@ -129,12 +129,10 @@ span.badge.badge-pill.badge-success {
 }
 
 .iliaslogo {
-	height: 15%;
-     width: auto;
-    margin-right: 45px;
-    margin-left: 55px;
-    bottom: 25px;
-    position: absolute;
+    width: 50%;
+    bottom: 0px;
+    left: 25%;
+    position:absolute;
 }
 
 
