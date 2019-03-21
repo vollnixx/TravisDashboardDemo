@@ -2,6 +2,9 @@ SimpleILIASDashboard = (function () {
   'use strict';
   let pub = {}, pri = {
     danger_span:   '<span class="badge badge-pill badge-danger">Danger</span>',
+    success_span:   '<span class="badge badge-pill badge-success">Success</span>',
+    background_colors_success : "['#74B85D', '#92C780', '#BBDCAF', '#D8EBD2']",
+    background_colors_fail : "['#c7372b', '#e20201', '#f33a2f', '#fa6553']",
     html_snippets: {
       card_header:              '.card-header h6',
       phpunit_date_class:       '.phpunit_date',
@@ -11,7 +14,7 @@ SimpleILIASDashboard = (function () {
     }
   };
 
-  pub.createPHPUnitWidget = function (url, version, id, title, warn, skip, incomp, failure) {
+  pub.createPHPUnitWidget = function (url, version, id, title, warn, skip, incomp, fail, failure) {
     let failed = '';
 
     if (failure === "true") {
@@ -28,7 +31,7 @@ SimpleILIASDashboard = (function () {
                 ' <div class="row hidden">' +
                   ' <div class="col-md-8">' +
                     ' <div class="chart-pie pt-6 pb-2">' +
-                      ' <canvas id="' + id + '"></canvas>' +
+                      ' <canvas id="' + version + '_' + id + '"></canvas>' +
                     ' </div>' +
                   ' </div>' +
                   ' <div class="col-md-4 ">' +
@@ -36,6 +39,7 @@ SimpleILIASDashboard = (function () {
                       pri.html_snippets.phpunit_state_html + ' text-warnings' + failed + '"></i> ' + warn + ' Warnings </p>' +
                       pri.html_snippets.phpunit_state_html + ' text-skipped' + failed + '"></i> ' + skip + ' Skipped </p>' +
                       pri.html_snippets.phpunit_state_html + ' text-incomplete' + failed + '"></i> ' + incomp + ' Incomplete </p>' +
+                      pri.html_snippets.phpunit_state_html + ' text-incomplete' + failed + '"></i> ' + fail + ' Failed </p>' +
                     ' </div>' + 
                   ' </div>' +
                 ' </div>' + 
@@ -62,16 +66,20 @@ SimpleILIASDashboard = (function () {
   };
 
 
- pub.initialiseGraph = function (card_id, card_object) {
+ pub.initialiseGraph = function (card_id, card_object, failure, warn, skip, incomp, complete) {
    let card_cleaned_id = card_id.split("_card")[0];
-   console.log(card_cleaned_id)
+   let backgroundColor = pri.background_colors_success;
+   if (failure === "true") {
+         backgroundColor = pri.background_colors_fail;
+   }
+   
     card_object.append('    <script>$( document ).ready(function() {' +
-        'let ctx = document.getElementById("php7.0");'+
+        'let ctx = document.getElementById("' + card_cleaned_id +'");'+
         'let myPieChart = new Chart(ctx, {'+
         ' type: "doughnut", data: { labels: ["Warnings", "Skipped", "Incomplete"],'+
-        '   datasets: [{data: [ 14, 13, 13], backgroundColor: ["#74B85D", "#92C780", "#BBDCAF", "#D8EBD2"], hoverBackgroundColor: ["#5B854D","#5B854D","#5B854D","#5B854D"], hoverBorderColor: "rgba(234, 236, 244, 1)",}],'+
+        '   datasets: [{data: [ '+ warn +', '+ skip +', '+ incomp +'], backgroundColor: ' + backgroundColor + ', hoverBackgroundColor: ["#5B854D","#5B854D","#5B854D","#5B854D"], hoverBorderColor: "rgba(234, 236, 244, 1)",}],'+
         ' },'+
-        ' options: {elements: {center: {text: "Tests: 54002",color: "#212529", fontStyle: "Helvetica", sidePadding: 20 }}, maintainAspectRatio: false,'+
+        ' options: {elements: {center: {text: "Tests: ' + complete + '",color: "#212529", fontStyle: "Helvetica", sidePadding: 20 }}, maintainAspectRatio: false,'+
         '   tooltips:{backgroundColor: "rgb(0,255,255)",bodyFontColor:"#858796",borderColor: "#dddfeb",borderWidth: 1,xPadding: 15,yPadding: 15,displayColors: false,caretPadding: 10,bodyFontFamily: "sans-serif",},'+
    '   legend: {display: false},cutoutPercentage: 60,},'+
    '});'+
@@ -80,22 +88,24 @@ SimpleILIASDashboard = (function () {
 
   };
 
-  pub.replaceLoaderSymbolForPHPUnitCard = function (card_id, failure) {
+  pub.replaceLoaderSymbolForPHPUnitCard = function (card_id, failure, warn, skip, incomp, complete) {
     let card_object = $('#' + card_id);
-    let date_object = $(pri.html_snippets.phpunit_date_class);
-    let today = new Date().toLocaleDateString();
-      console.log(failure, pri.danger_span)
+    console.log('CARD_ID', card_id)
+
     if (failure === "true") {
       card_object.find(pri.html_snippets.card_header).html(
         card_object.find(pri.html_snippets.card_header).html() + pri.danger_span
       );
-
+    }
+    else {
+      card_object.find(pri.html_snippets.card_header).html(
+        card_object.find(pri.html_snippets.card_header).html() + pri.success_span
+      );
     }
 
-    date_object.html('last run: ' + today);
     card_object.find('.phpunit').removeClass('phpunit');
     card_object.find('.row').removeClass('hidden');
-    pub.initialiseGraph(card_id, card_object);
+    pub.initialiseGraph(card_id, card_object, failure, warn, skip, incomp, complete);
   };
 
   pub.createPHPUnitWidgets = function (data) {
@@ -106,15 +116,16 @@ SimpleILIASDashboard = (function () {
     for (let singleRow = 0; singleRow < allRows.length; singleRow++) {
       let cells = allRows[singleRow].split(',');
       let url = cells[0], version = 'ILIAS_' + cells[1], id = cells[2], 
-          title = cells[3], warn = cells[4], skip = cells[5], incomp = cells[6], failure = cells[7];
+          title = cells[3], warn = cells[4], skip = cells[5], incomp = cells[6],
+          complete = cells[7], failed = cells[8], failure = cells[9];
 
       if( $('.phpunit_data').find('.' + version).length === 0) {
          $('.phpunit_data').append('<div class="' + version + ' col-md-12"><h4>' + version + '</h4></div>')
       }
-      $('.phpunit_data .' + version).append(pub.createPHPUnitWidget(url, version, id, title, warn, skip, incomp, failure));
+      $('.phpunit_data .' + version).append(pub.createPHPUnitWidget(url, version, id, title, warn, skip, incomp, failed, failure));
 
       let interval = setInterval(function () {
-        SimpleILIASDashboard.replaceLoaderSymbolForPHPUnitCard(version + '_' + id + "_card", failure);
+        SimpleILIASDashboard.replaceLoaderSymbolForPHPUnitCard(version + '_' + id + "_card", failure, warn, skip, incomp, complete);
         
         clearInterval(interval);
       }, Math.random() * 1000);

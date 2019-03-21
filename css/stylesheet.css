@@ -90,6 +90,16 @@ span.badge.badge-pill.badge-danger {
 	margin-left: 8px;
 }
 
+.badge-success {
+    color: #212529;
+    background-color: #3dff00 !important;
+}
+
+span.badge.badge-pill.badge-success {
+    font-size: 60%;
+  margin-left: 8px;
+}
+
 
 .travis:before {
 	content: "";
