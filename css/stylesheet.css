@@ -129,13 +129,18 @@ span.badge.badge-pill.badge-success {
 }
 
 .iliaslogo {
-    width: 50%;
     bottom: 0px;
-    left: 25%;
+    text-align: center;
     position:absolute;
 }
 
+.iliaslogo:hover {
+    background-color: #003a66 !important;
+}
 
+.iliaslogo img {
+    width: 50%;
+}
 
 
 .text-assertations {
