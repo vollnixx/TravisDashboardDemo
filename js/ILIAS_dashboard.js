@@ -137,28 +137,32 @@ SimpleILIASDashboard = (function () {
 
     for (let singleRow = 0; singleRow < allRows.length; singleRow++) {
       let cells = allRows[singleRow].split(',');
-      let url       = cells[0], 
-          version   = cells[1],
-          id        = cells[2], 
-          title     = cells[3], 
-          warn      = cells[4], 
-          skip      = cells[5], 
-          incomp    = cells[6],
-          complete  = cells[7], 
-          failed    = cells[8], 
-          failure   = cells[9];
-      let version_string = 'ILIAS_' + version;
 
-      if( $('.phpunit_data').find('.' + version_string).length === 0) {
-         $('.phpunit_data').append('<div class="' + version_string + ' col-md-12"><h4>' + version_string + '</h4></div>')
+      if(cells.length > 1) {
+        let url       = cells[0], 
+            version   = cells[1],
+            id        = cells[2], 
+            title     = cells[3], 
+            warn      = cells[4], 
+            skip      = cells[5], 
+            incomp    = cells[6],
+            complete  = cells[7], 
+            failed    = cells[8], 
+            failure   = cells[9];
+        let version_string = 'ILIAS_' + version;
+
+        if( $('.phpunit_data').find('.' + version_string).length === 0) {
+           $('.phpunit_data').append('<div class="' + version_string + ' col-md-12"><h4>' + version_string + '</h4></div>')
+        }
+        $('.phpunit_data .' + version_string).append(pub.createPHPUnitWidget(url, version_string, id, title, warn, skip, incomp, failed, failure));
+
+        let interval = setInterval(function () {
+          SimpleILIASDashboard.replaceLoaderSymbolForPHPUnitCard(version_string + '_' + id + "_card", failure, warn, skip, incomp, failed, complete);
+          
+          clearInterval(interval);
+        }, Math.random() * 1000);
       }
-      $('.phpunit_data .' + version_string).append(pub.createPHPUnitWidget(url, version_string, id, title, warn, skip, incomp, failed, failure));
-
-      let interval = setInterval(function () {
-        SimpleILIASDashboard.replaceLoaderSymbolForPHPUnitCard(version_string + '_' + id + "_card", failure, warn, skip, incomp, failed, complete);
-        
-        clearInterval(interval);
-      }, Math.random() * 1000);
+ 
     }
   };
 
@@ -167,9 +171,12 @@ SimpleILIASDashboard = (function () {
    
     for (let singleRow = 0; singleRow < allRows.length; singleRow++) {
         let cells = allRows[singleRow].split(',');
-        let date = cells[0], url = cells[1], total = cells[2], resolved = cells[3], added = cells[4];
 
-      $('.dicto-data').append(pub.createDictoWidget(date, url, total, resolved, added));
+         if(cells.length > 1) {
+            let date = cells[0], url = cells[1], total = cells[2], resolved = cells[3], added = cells[4];
+      
+            $('.dicto-data').append(pub.createDictoWidget(date, url, total, resolved, added));
+      }
     }
   };
 
