@@ -75,19 +75,37 @@ SimpleILIASDashboard = (function () {
          backgroundColor = pri.background_colors_fail;
    }
    
-    card_object.append('    <script>$( document ).ready(function() {' +
-        'let ctx = document.getElementById("' + card_cleaned_id +'");'+
-        'let myPieChart = new Chart(ctx, {'+
-        ' type: "doughnut", data: { labels: ["Warnings", "Skipped", "Incomplete", "Failed"],'+
-        '   datasets: [{data: [ '+ warn +', '+ skip +', '+ incomp +', '+ failed +',], backgroundColor: ' + backgroundColor + 
-                      ', hoverBackgroundColor: ["#ffa500","#ffa500","#ffa500","#ffa500"], hoverBorderColor: "rgba(234, 236, 244, 1)",}],'+
-        ' },'+
-        ' options: {elements: {center: {text: "Tests: ' + complete + '",color: "#212529", fontStyle: "Helvetica", sidePadding: 20 }}, maintainAspectRatio: false,'+
-        '   tooltips:{backgroundColor: "rgb(0,255,255)",bodyFontColor:"#858796",borderColor: "#dddfeb",borderWidth: 1,xPadding: 15,yPadding: 15,displayColors: false,caretPadding: 10,bodyFontFamily: "sans-serif",},'+
-        '   legend: {display: false},cutoutPercentage: 60,},'+
-        '});'+
-        '});</script>');
-
+    card_object.append( 
+            '<script>'+
+              '$( document ).ready(function() {' +
+                'let ctx = document.getElementById("' + card_cleaned_id +'");'+
+                'let myPieChart = new Chart(ctx, {'+
+                  'type: "doughnut", data: '+
+                    '{ '+
+                      'labels: ["Warnings", "Skipped", "Incomplete", "Failed"],'+
+                      'datasets: ['+
+                        '{data: [ '+ warn +', '+ skip +', '+ incomp +', '+ failed +',], '+
+                          'backgroundColor: ' + backgroundColor + ',' + 
+                          'hoverBackgroundColor: ["#ffa500","#ffa500","#ffa500","#ffa500"],'+
+                          'hoverBorderColor: "rgba(234, 236, 244, 1)"'+
+                          '}],'+
+                        '},'+
+                      'options: {'+
+                            'elements: '+
+                                  '{'+
+                                    'center: {'+
+                                          'text: "Tests: ' + complete + '",color: "#212529", fontStyle: "Helvetica", sidePadding: 20 '+
+                                        '}'+
+                                   '}, '+
+                      'maintainAspectRatio: false,'+
+                      'tooltips:'+
+                        '{backgroundColor: "#0059ff",bodyFontColor:"#ffffff",borderColor: "#dddfeb",'+
+                          'borderWidth: 1,xPadding: 15,yPadding: 15,displayColors: false,caretPadding: 10,'+
+                          'bodyFontFamily: "sans-serif",},'+
+                      'legend: {display: false},cutoutPercentage: 60,},'+
+                    '});'+
+                '});'+
+            '</script>');
 
   };
 
@@ -146,10 +164,12 @@ SimpleILIASDashboard = (function () {
 
     pub.createDictoWidgets = function (data) {
     let allRows = data.split(/\r?\n|\r/);
-
+   
     for (let singleRow = 0; singleRow < allRows.length; singleRow++) {
-      let cells = allRows[singleRow].split(',');
-      $('.dicto-data').append(pub.createDictoWidget(cells[0], cells[1], cells[2], cells[3], cells[4]));
+        let cells = allRows[singleRow].split(',');
+        let date = cells[0], url = cells[1], total = cells[2], resolved = cells[3], added = cells[4];
+
+      $('.dicto-data').append(pub.createDictoWidget(date, url, total, resolved, added));
     }
   };
 
@@ -179,6 +199,50 @@ SimpleILIASDashboard = (function () {
       }, Math.random() * 5000); });
   };
 
+  pub.appendChartJSExtensionForCenterText = function() {
+       Chart.pluginService.register({
+      beforeDraw: function (chart) {
+        if (chart.config.options.elements.center) {
+          //Get ctx from string
+          let ctx = chart.chart.ctx;
+
+          //Get options from the center object in options
+          let centerConfig = chart.config.options.elements.center;
+          let fontStyle = centerConfig.fontStyle || 'Arial';
+          let txt = centerConfig.text;
+          let color = centerConfig.color || '#000';
+          let sidePadding = centerConfig.sidePadding || 20;
+          let sidePaddingCalculated = (sidePadding / 100) * (chart.innerRadius * 2)
+            //Start with a base font of 30px
+          ctx.font = "30px " + fontStyle;
+
+          //Get the width of the string and also the width of the element minus 10 to give it 5px side padding
+          let stringWidth = ctx.measureText(txt).width;
+          let elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
+
+          // Find out how much the font can grow in width.
+          let widthRatio = elementWidth / stringWidth;
+          let newFontSize = Math.floor(30 * widthRatio);
+          let elementHeight = (chart.innerRadius * 2);
+
+          // Pick a new font size so it will not be larger than the height of label.
+          let fontSizeToUse = Math.min(newFontSize, elementHeight);
+
+          //Set font settings to draw it correctly.
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          let centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
+          let centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
+          ctx.font = fontSizeToUse + "px " + fontStyle;
+          ctx.fillStyle = color;
+
+          //Draw text in center
+          ctx.fillText(txt, centerX, centerY);
+        }
+      }
+    });
+  };
+
 
   return pub;
   
@@ -188,5 +252,8 @@ $( document ).ready(function() {
     $('.card-header').find('.badge-danger').remove();
     SimpleILIASDashboard.getPHPUnitData();
     SimpleILIASDashboard.getDictoData();
+    SimpleILIASDashboard.appendChartJSExtensionForCenterText();
     $('body').scrollspy({ target: '#nav_list' });
+
+
 });
