@@ -130,14 +130,30 @@ SimpleILIASDashboard = (function () {
       );
   };
 
+  pro.compareByThird = function(first, second) {
+    let left = first.split(',');
+    let right = second.split(',');
+    if (left[2] < right[2]) {
+        return -1;
+    } else if (left[2] > right[2] ){
+        return 1;
+    } else {
+        return 0;
+    }
+  }
+
   pub.createPHPUnitWidgets = function (data) {
     let allRows = data.split(/\r?\n|\r/);
 
+
+    console.log('hello', allRows)
+allRows.sort(pro.compareByThird);
+
+    console.log('hello1', allRows)
     $('.card-header').find('.badge-danger').remove();
 
     for (let singleRow = 0; singleRow < allRows.length; singleRow++) {
       let cells = allRows[singleRow].split(',');
-
       if(cells.length > 1) {
         let url       = cells[0], 
             version   = cells[1],
