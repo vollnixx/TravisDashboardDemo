@@ -5,10 +5,11 @@ STRING=`tail -n1 < /tmp/phpunit`
 SPLIT_STRING=(`echo $STRING | tr ':' ' '`)
 PHP_VERSION=`php -r "echo PHP_MAJOR_VERSION . '_' . PHP_MINOR_VERSION;"`
 ILIAS_VERSION=`php -r "require_once 'include/inc.ilias_version.php'; echo ILIAS_VERSION_NUMERIC;"`
-JOB_ID=2312.2
+JOB_ID=`echo TRAVIS_JOB_NUMBER`
+JOB_URL=`echo TRAVIS_JOB_WEB_URL`
 FAILURE=false
-
 declare -A RESULTS=([Tests]=0, [Assertions]=0, [Errors]=0, [Warnings]=0, [Skipped]=0, [Incomplete]=0);
+
 for TYPE in "${!RESULTS[@]}"; 
 	do 
 		for PHP_UNIT_RESULT in "${!SPLIT_STRING[@]}"; 
