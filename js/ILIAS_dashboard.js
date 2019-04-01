@@ -15,7 +15,7 @@ SimpleILIASDashboard = (function () {
     }
   };
 
-  pub.createPHPUnitWidget = function (url, version, id, title, warn, skip, incomp, fail, failure) {
+  pub.createPHPUnitWidget = function (url, version, job_id, id, title, warn, skip, incomp, fail, failure) {
     let failed = '';
 
     if (failure === "true") {
@@ -26,7 +26,7 @@ SimpleILIASDashboard = (function () {
             ' <div class="col-xl-12">' +
               ' <div class="card shadow mb-4" id="' + version + '_' + id + '_card">' +
                 pri.html_snippets.card_header_html_begin +
-                ' <h6>' + title + '</h6>' +
+                ' <h6>' + title + '</h6>' + '<h7>' + job_id + '</h7>' +
               ' </div>' +
               ' <div class="card-body phpunit">' +
                 ' <div class="row hidden">' +
@@ -50,12 +50,12 @@ SimpleILIASDashboard = (function () {
         ' </a>' ;
   }
 
-    pub.createDictoWidget = function (date, url, total, resolved, added) {
+    pub.createDictoWidget = function (date, job_id, url, total, resolved, added) {
 
     return '<div class="col-xl-6 col-lg-6"> ' +
             '<div class="card shadow mb-4">' +
                pri.html_snippets.card_header_html_begin +
-                '<h6>Dicto ' + date + '</h6>' +
+                '<h6>Dicto ' + date + '</h6>' + '<h6>' + job_id + '</h6>' +
               '</div>' +
               '<div class="card-body d-flex justify-content-between">' + 
                 pri.html_snippets.dicto_state_html + ' badge-warning mr-2" href="#">' + total + ' Total</a> </span>' +
@@ -74,6 +74,8 @@ SimpleILIASDashboard = (function () {
    if (failure === "true") {
          backgroundColor = pri.background_colors_fail;
    }
+
+   console.log(card_id, card_object, failure, warn, skip, incomp, failed, complete) 
    
     card_object.append( 
             '<script>'+
@@ -130,13 +132,13 @@ SimpleILIASDashboard = (function () {
       );
   };
 
-  pro.compareByThird = function(first, second) {
+  pro.compareBySecond = function(first, second) {
     let left = first.split(',');
     let right = second.split(',');
-    if (left[2] < right[2]) {
-        return -1;
-    } else if (left[2] > right[2] ){
+    if (left[1] < right[1]) {
         return 1;
+    } else if (left[1] > right[1] ){
+        return -1;
     } else {
         return 0;
     }
@@ -145,32 +147,30 @@ SimpleILIASDashboard = (function () {
   pub.createPHPUnitWidgets = function (data) {
     let allRows = data.split(/\r?\n|\r/);
 
+    allRows.sort(pro.compareBySecond);
 
-    console.log('hello', allRows)
-allRows.sort(pro.compareByThird);
-
-    console.log('hello1', allRows)
     $('.card-header').find('.badge-danger').remove();
 
     for (let singleRow = 0; singleRow < allRows.length; singleRow++) {
-      let cells = allRows[singleRow].split(',');
-      if(cells.length > 1) {
-        let url       = cells[0], 
-            version   = cells[1],
-            id        = cells[2], 
-            title     = cells[3], 
-            warn      = cells[4], 
-            skip      = cells[5], 
-            incomp    = cells[6],
-            complete  = cells[7], 
-            failed    = cells[8], 
-            failure   = cells[9];
-        let version_string = 'ILIAS_' + version;
+          let cells = allRows[singleRow].split(',');
+          if(cells.length > 1) {
+            let url       = cells[0], 
+                job_id    = cells[1],
+                version   = cells[2],
+                id        = cells[3], 
+                title     = cells[4], 
+                warn      = cells[5], 
+                skip      = cells[6], 
+                incomp    = cells[7],
+                complete  = cells[8], 
+                failed    = cells[9], 
+                failure   = cells[10];
+            let version_string = 'ILIAS_' + version;
 
         if( $('.phpunit_data').find('.' + version_string).length === 0) {
            $('.phpunit_data').append('<div class="' + version_string + ' col-md-12"><h4>' + version_string + '</h4></div>')
         }
-        $('.phpunit_data .' + version_string).append(pub.createPHPUnitWidget(url, version_string, id, title, warn, skip, incomp, failed, failure));
+        $('.phpunit_data .' + version_string).append(pub.createPHPUnitWidget(url, version_string, job_id, id, title, warn, skip, incomp, failed, failure));
 
         let interval = setInterval(function () {
           SimpleILIASDashboard.replaceLoaderSymbolForPHPUnitCard(version_string + '_' + id + "_card", failure, warn, skip, incomp, failed, complete);
@@ -189,9 +189,14 @@ allRows.sort(pro.compareByThird);
         let cells = allRows[singleRow].split(',');
 
          if(cells.length > 1) {
-            let date = cells[0], url = cells[1], total = cells[2], resolved = cells[3], added = cells[4];
+            let  date     = cells[0], 
+                 job_id   = cells[1],
+                 url      = cells[2], 
+                 total    = cells[3], 
+                 resolved = cells[4], 
+                 added    = cells[5];
       
-            $('.dicto-data').append(pub.createDictoWidget(date, url, total, resolved, added));
+            $('.dicto-data').append(pub.createDictoWidget(date, job_id, url, total, resolved, added));
       }
     }
   };
