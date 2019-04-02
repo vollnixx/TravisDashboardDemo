@@ -130,12 +130,12 @@ SimpleILIASDashboard = (function () {
       );
   };
 
-  pro.compareBySecond = function(first, second) {
+  pro.compareByThird = function(first, second) {
     let left = first.split(',');
     let right = second.split(',');
-    if (left[1] < right[1]) {
+    if (left[2] < right[2]) {
         return 1;
-    } else if (left[1] > right[1] ){
+    } else if (left[2] > right[2] ){
         return -1;
     } else {
         return 0;
@@ -145,7 +145,7 @@ SimpleILIASDashboard = (function () {
   pub.createPHPUnitWidgets = function (data) {
     let allRows = data.split(/\r?\n|\r/);
 
-    allRows.sort(pro.compareBySecond);
+    allRows.sort(pro.compareByThird);
 
     $('.card-header').find('.badge-danger').remove();
 
