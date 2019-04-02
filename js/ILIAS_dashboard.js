@@ -74,9 +74,7 @@ SimpleILIASDashboard = (function () {
    if (failure === "true") {
          backgroundColor = pri.background_colors_fail;
    }
-
-   console.log(card_id, card_object, failure, warn, skip, incomp, failed, complete) 
-   
+ 
     card_object.append( 
             '<script>'+
               '$( document ).ready(function() {' +
@@ -183,10 +181,10 @@ SimpleILIASDashboard = (function () {
   };
 
     pub.createDictoWidgets = function (data) {
-    let allRows = data.split(/\r?\n|\r/);
+      let allRows = data.split(/\r?\n|\r/);
    
-    for (let singleRow = 0; singleRow < allRows.length; singleRow++) {
-        let cells = allRows[singleRow].split(',');
+      for ( let singleRow = 0; singleRow < allRows.length; singleRow++ ) {
+            let cells = allRows[singleRow].split(',');
 
          if(cells.length > 1) {
             let  date     = cells[0], 
@@ -206,22 +204,24 @@ SimpleILIASDashboard = (function () {
   };
 
   pub.getPHPUnitData = function () {
-
-    $.ajax({
-      url:      'data/phpunit_latest.csv',
-      dataType: 'text',
-    }).done(pub.createPHPUnitWidgets)
-    .fail(function (jqXHR, textStatus, errorThrown) { setInterval(function () {
-          pub.anErrorOccured();
-      }, Math.random() * 5000); });
+    let url = 'data/phpunit_latest.csv';
+    let callback = pub.createPHPUnitWidgets;
+    
+    pro.getDataFile(url, callback);
   };
 
-    pub.getDictoData = function () {
+  pub.getDictoData = function () {
+    let url = 'data/dicto_latest.csv';
+    let callback = pub.createDictoWidgets;
+  
+    pro.getDataFile(url, callback);
+  };
 
+  pro.getDataFile = function(url, callback) {
     $.ajax({
-      url:      'data/dicto_latest.csv',
+      url:      url + '?' + new Date().getTime(),
       dataType: 'text',
-    }).done(pub.createDictoWidgets)
+    }).done(callback)
     .fail(function (jqXHR, textStatus, errorThrown) { setInterval(function () {
           pub.anErrorOccured();
       }, Math.random() * 5000); });
