@@ -64,8 +64,8 @@ SimpleILIASDashboard = (function () {
     if(jf !== "0"){
       title = 'Since last Jour fixe';
       values =  pri.html_snippets.dicto_state_html + ' badge-warning mr-2" href="#">' + jf + ' Total</a> </span>' +
-                  pri.html_snippets.dicto_state_html + ' badge-success mr-2" href="#">' + resolved + ' Resolved</a> </span>' +
-                  pri.html_snippets.dicto_state_html + ' badge-danger mr-2" href="#">'  + added + ' Added</a> </span>'; 
+                pri.html_snippets.dicto_state_html + ' badge-success mr-2" href="#">' + resolved + ' Resolved</a> </span>' +
+                pri.html_snippets.dicto_state_html + ' badge-danger mr-2" href="#">'  + added + ' Added</a> </span>'; 
     } 
 
     return '<div class="col-xl-4 col-lg-4"> ' +
