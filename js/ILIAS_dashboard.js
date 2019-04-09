@@ -15,7 +15,7 @@ SimpleILIASDashboard = (function () {
     }
   };
 
-  pub.createPHPUnitWidget = function (url, version, job_id, id, title, warn, skip, incomp, risky, fail, failure) {
+  pub.createPHPUnitWidget = function (url, version, job_id, id, title, warn, skip, incomp, risky, fail, failure, date) {
     let failed = '';
 
     if (failure === "true") {
@@ -30,12 +30,12 @@ SimpleILIASDashboard = (function () {
               ' </div>' +
               ' <div class="card-body phpunit">' +
                 ' <div class="row hidden">' +
-                  ' <div class="col-md-8">' +
+                  ' <div class="col-md-7">' +
                     ' <div class="chart-pie pt-6 pb-2">' +
                       ' <canvas id="' + version + '_' + id + '"></canvas>' +
                     ' </div>' +
                   ' </div>' +
-                  ' <div class="col-md-4 ">' +
+                  ' <div class="col-md-5">' +
                     ' <div class="mt-4 text-left small ">' +
                       pri.html_snippets.phpunit_state_html + ' text-warnings'   + failed + '"></i> ' + warn + ' Warnings </p>' +
                       pri.html_snippets.phpunit_state_html + ' text-skipped'    + failed + '"></i> ' + skip + ' Skipped </p>' +
@@ -44,8 +44,8 @@ SimpleILIASDashboard = (function () {
                       pri.html_snippets.phpunit_state_html + ' text-failed'     + failed + '"></i> ' + fail + ' Failed </p>' +
                     ' </div>' + 
                   ' </div>' +
-                ' </div>' + 
-              ' </div>' +
+                ' </div>'+
+              ' </div><span class="date_footer small">' + date + '</span>' +
             ' </div>' + 
           ' </div>' +
         ' </a>' ;
@@ -178,7 +178,8 @@ SimpleILIASDashboard = (function () {
                 complete  = cells[8], 
                 failed    = cells[9], 
                 risky     = cells[10], 
-                failure   = cells[11];
+                failure   = cells[11],
+                date      = cells[12];
             let version_string = 'ILIAS_' + version;
             console.log(cells)
 
@@ -187,7 +188,7 @@ SimpleILIASDashboard = (function () {
             version_readable = version_readable.replace(/ILIAS\./g, "ILIAS ");
             $('.phpunit_data').append('<div class="' + version_string + ' col-md-12"><h5>' + version_readable + '</h5></div>')
         }
-        $('.phpunit_data .' + version_string).append(pub.createPHPUnitWidget(url, version_string, job_id, id, title, warn, skip, incomp, risky, failed, failure));
+        $('.phpunit_data .' + version_string).append(pub.createPHPUnitWidget(url, version_string, job_id, id, title, warn, skip, incomp, risky, failed, failure, date));
 
         let interval = setInterval(function () {
           SimpleILIASDashboard.replaceLoaderSymbolForPHPUnitCard(version_string + '_' + id + "_card", failure, warn, skip, incomp, risky, failed, complete);

@@ -244,3 +244,13 @@ color: #c7372b;
 .text-failed-warning{
   color: #99372B !important;
 }
+
+.date_footer{
+  text-align:right;
+  margin-bottom: 0.5em;
+  margin-right: 0.5em;
+}
+
+.card-body {
+  padding-bottom: 0em !important;
+}
