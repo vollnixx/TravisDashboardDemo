@@ -232,3 +232,15 @@ color: #c7372b;
 .list-group-item {
   background-color: #17295f !important;
 }
+
+.custom-risky-warning{
+  color: #C7372B !important;
+}
+
+.custom-risky{
+  color: #74B85D !important;
+}
+
+.text-failed-warning{
+  color: #99372B !important;
+}

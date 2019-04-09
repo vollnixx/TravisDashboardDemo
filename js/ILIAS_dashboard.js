@@ -4,8 +4,8 @@ SimpleILIASDashboard = (function () {
   let pub = {}, pro = {}, pri = {
     danger_span               : '<span class="badge badge-pill badge-danger">Danger</span>',
     success_span              : '<span class="badge badge-pill badge-success">Success</span>',
-    background_colors_success : "['#D8EBD2', '#92C780', '#BBDCAF', '#74B85D']",
-    background_colors_fail    : "['#fa6553', '#e20201', '#f33a2f', '#c7372b']",
+    background_colors_success : "['#D8EBD2', '#92C780', '#BBDCAF', '#74B85D', '#99B85D']",
+    background_colors_fail    : "['#fa6553', '#e20201', '#f33a2f', '#C7372B', '#99372B']",
     html_snippets : {
       card_header             : '.card-header h6',
       phpunit_date_class      : '.phpunit_date',
@@ -15,7 +15,7 @@ SimpleILIASDashboard = (function () {
     }
   };
 
-  pub.createPHPUnitWidget = function (url, version, job_id, id, title, warn, skip, incomp, fail, failure) {
+  pub.createPHPUnitWidget = function (url, version, job_id, id, title, warn, skip, incomp, risky, fail, failure) {
     let failed = '';
 
     if (failure === "true") {
@@ -40,6 +40,7 @@ SimpleILIASDashboard = (function () {
                       pri.html_snippets.phpunit_state_html + ' text-warnings'   + failed + '"></i> ' + warn + ' Warnings </p>' +
                       pri.html_snippets.phpunit_state_html + ' text-skipped'    + failed + '"></i> ' + skip + ' Skipped </p>' +
                       pri.html_snippets.phpunit_state_html + ' text-incomplete' + failed + '"></i> ' + incomp + ' Incomplete </p>' +
+                      pri.html_snippets.phpunit_state_html + ' custom-risky'    + failed + '"></i> ' + risky + ' Risky </p>' +
                       pri.html_snippets.phpunit_state_html + ' text-failed'     + failed + '"></i> ' + fail + ' Failed </p>' +
                     ' </div>' + 
                   ' </div>' +
@@ -81,7 +82,7 @@ SimpleILIASDashboard = (function () {
   };
 
 
- pub.initialiseGraph = function (card_id, card_object, failure, warn, skip, incomp, failed, complete) {
+ pub.initialiseGraph = function (card_id, card_object, failure, warn, skip, incomp, risky, failed, complete) {
    let card_cleaned_id = card_id.split("_card")[0];
    let backgroundColor = pri.background_colors_success;
 
@@ -96,9 +97,9 @@ SimpleILIASDashboard = (function () {
                 'let myPieChart = new Chart(ctx, {'+
                   'type: "doughnut", data: '+
                     '{ '+
-                      'labels: ["Warnings", "Skipped", "Incomplete", "Failed"],'+
+                      'labels: ["Warnings", "Skipped", "Incomplete", "Risky", "Failed"],'+
                       'datasets: ['+
-                        '{data: [ '+ warn +', '+ skip +', '+ incomp +', '+ failed +',], '+
+                        '{data: [ '+ warn +', '+ skip +', '+ incomp + ', ' + risky + ' , ' + failed +'], '+
                           'backgroundColor: ' + backgroundColor + ',' + 
                           'hoverBackgroundColor: ["#ffa500","#ffa500","#ffa500","#ffa500"],'+
                           'hoverBorderColor: "rgba(234, 236, 244, 1)"'+
@@ -123,7 +124,7 @@ SimpleILIASDashboard = (function () {
 
   };
 
-  pub.replaceLoaderSymbolForPHPUnitCard = function (card_id, failure, warn, skip, incomp, failed, complete) {
+  pub.replaceLoaderSymbolForPHPUnitCard = function (card_id, failure, warn, skip, incomp, risky, failed, complete) {
     let card_object = $('#' + card_id);
 
     if (failure === "true") {
@@ -135,7 +136,7 @@ SimpleILIASDashboard = (function () {
 
     card_object.find('.phpunit').removeClass('phpunit');
     card_object.find('.row').removeClass('hidden');
-    pub.initialiseGraph(card_id, card_object, failure, warn, skip, incomp, failed, complete);
+    pub.initialiseGraph(card_id, card_object, failure, warn, skip, incomp, risky, failed, complete);
   };
 
   pro.addPHPUnitHeader = function(card_object, state) {
@@ -176,18 +177,20 @@ SimpleILIASDashboard = (function () {
                 incomp    = cells[7],
                 complete  = cells[8], 
                 failed    = cells[9], 
-                failure   = cells[10];
+                risky     = cells[10], 
+                failure   = cells[11];
             let version_string = 'ILIAS_' + version;
+            console.log(cells)
 
         if( $('.phpunit_data').find('.' + version_string).length === 0) {
             let version_readable = version_string.replace(/_/g, ".");
             version_readable = version_readable.replace(/ILIAS\./g, "ILIAS ");
             $('.phpunit_data').append('<div class="' + version_string + ' col-md-12"><h5>' + version_readable + '</h5></div>')
         }
-        $('.phpunit_data .' + version_string).append(pub.createPHPUnitWidget(url, version_string, job_id, id, title, warn, skip, incomp, failed, failure));
+        $('.phpunit_data .' + version_string).append(pub.createPHPUnitWidget(url, version_string, job_id, id, title, warn, skip, incomp, risky, failed, failure));
 
         let interval = setInterval(function () {
-          SimpleILIASDashboard.replaceLoaderSymbolForPHPUnitCard(version_string + '_' + id + "_card", failure, warn, skip, incomp, failed, complete);
+          SimpleILIASDashboard.replaceLoaderSymbolForPHPUnitCard(version_string + '_' + id + "_card", failure, warn, skip, incomp, risky, failed, complete);
           
           clearInterval(interval);
         }, Math.random() * 1000);
